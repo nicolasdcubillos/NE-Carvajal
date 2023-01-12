@@ -630,7 +630,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 	oITS.appendChild(oXML.createTextNode(ccTAB))
 
 	oSPE = oITS.appendChild(oXML.createElement("SPE"))
-	
+
 	oSPE.appendChild(oXML.createTextNode(ccCRLF))
 	oSPE.appendChild(oXML.createTextNode(ccTAB))
 	oSPE.appendChild(oXML.createTextNode(ccTAB))
@@ -761,6 +761,79 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oETR1.TEXT = ALLTRIM(CAST(CAST(oETR1.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
 				ENDIF
 
+			CASE S_CONCEPDIAN = '103' && VIATICO SALARIALES
+				IF VARTYPE (oETR) = 'U'
+					oETR = oITE.appendChild(oXML.createElement("ETR"))
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR1 = oETR.appendChild(oXML.createElement("ETR_1"))
+					oETR1.TEXT = ""
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR2 = oETR.appendChild(oXML.createElement("ETR_2"))
+					oETR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR3 = oETR.appendChild(oXML.createElement("ETR_3"))
+					oETR3.TEXT = "0"
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+				ELSE
+					oETR2.TEXT = ALLTRIM(CAST(CAST(oETR2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+				ENDIF
+
+			CASE S_CONCEPDIAN = '104' && VIATICO NO SALARIALES
+				IF VARTYPE (oETR) = 'U'
+					oETR = oITE.appendChild(oXML.createElement("ETR"))
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR1 = oETR.appendChild(oXML.createElement("ETR_1"))
+					oETR1.TEXT = ""
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR2 = oETR.appendChild(oXML.createElement("ETR_2"))
+					oETR2.TEXT = "0"
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+					oETR3 = oETR.appendChild(oXML.createElement("ETR_3"))
+					oETR3.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oETR.appendChild(oXML.createTextNode(ccCRLF))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+					oETR.appendChild(oXML.createTextNode(ccTAB))
+
+				ELSE
+					oETR3.TEXT = ALLTRIM(CAST(CAST(oETR3.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+				ENDIF
+
+
 			CASE S_CONCEPDIAN = '201' && CONCEPTO DIAN SALUD
 				oITS1.TEXT = ALLTRIM(CAST(C_GLOBAL.S_PORCENTAJESALUD AS CHARACTER (50)))
 				oITS2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
@@ -848,32 +921,67 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEVA2.TEXT = ALLTRIM(CAST(CAST(oEVA2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
 				ENDIF
 
-			CASE S_CONCEPDIAN = '109' && CONCEPTO DIAN PRIMA
-				oITE.appendChild(oXML.createTextNode(ccCRLF))
-				oITE.appendChild(oXML.createTextNode(ccTAB))
-				oITE.appendChild(oXML.createTextNode(ccTAB))
+			CASE S_CONCEPDIAN = '108' && CONCEPTO DIAN PRIMA SALARIAL
+				IF VARTYPE(oEPR) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
 
-				oEPR = oITE.appendChild(oXML.createElement("EPR"))
+					oEPR = oITE.appendChild(oXML.createElement("EPR"))
 
-				oEPR.appendChild(oXML.createTextNode(ccCRLF))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
-				oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
-				oEPR1.TEXT = "0"
+					oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
+					oEPR1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
 
-				oEPR.appendChild(oXML.createTextNode(ccCRLF))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
-				oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
-				oEPR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+					oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
+					oEPR2.TEXT = "0"
 
-				oEPR.appendChild(oXML.createTextNode(ccCRLF))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
-				oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+				ELSE
+					oEPR1.TEXT = ALLTRIM(CAST(CAST(oEPR1.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+				ENDIF
+
+			CASE S_CONCEPDIAN = '109' && CONCEPTO DIAN PRIMA NO SALARIAL
+				IF VARTYPE(oEPR) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEPR = oITE.appendChild(oXML.createElement("EPR"))
+
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+
+					oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
+					oEPR1.TEXT = "0"
+
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+
+					oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
+					oEPR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+				ELSE
+					oEPR2.TEXT = ALLTRIM(CAST(CAST(oEPR2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+				ENDIF
 
 			CASE S_CONCEPDIAN = '110' && CONCEPTO DIAN CESANTIAS
 				IF VARTYPE(oECE) = 'U'
@@ -1102,6 +1210,61 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oELR4.TEXT = ALLTRIM(CAST(CAST(oELR4.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
 				ENDIF
 
+			CASE S_CONCEPDIAN = '115' && CONCEPTO DIAN BONIFICACIONES SALARIALES
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN = oITE.appendChild(oXML.createElement("EBN"))
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN1 = oEBN.appendChild(oXML.createElement("EBN_1"))
+				oEBN1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN2 = oEBN.appendChild(oXML.createElement("EBN_2"))
+				oEBN2.TEXT = ""
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
+			CASE S_CONCEPDIAN = '116' && CONCEPTO DIAN BONIFICACIONES NO SALARIALES
+
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN = oITE.appendChild(oXML.createElement("EBN"))
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN1 = oEBN.appendChild(oXML.createElement("EBN_1"))
+				oEBN1.TEXT = ""
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBN2 = oEBN.appendChild(oXML.createElement("EBN_2"))
+				oEBN2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+				oEBN.appendChild(oXML.createTextNode(ccCRLF))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+				oEBN.appendChild(oXML.createTextNode(ccTAB))
+
 *!*				CASE S_CONCEPDIAN = '136' && CONCEPTO DIAN LICENCIAS NO REMUNERADAS
 *!*					IF VARTYPE(oELN) = 'U'
 *!*						oITE.appendChild(oXML.createTextNode(ccCRLF))
@@ -1140,51 +1303,81 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 *!*					ENDIF
 
 			CASE S_CONCEPDIAN = '117' && CONCEPTO DIAN AUXILIOS SALARIALES
-					oITE.appendChild(oXML.createTextNode(ccCRLF))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX = oITE.appendChild(oXML.createElement("EAX"))
+				oEAX = oITE.appendChild(oXML.createElement("EAX"))
 
-					oEAX.appendChild(oXML.createTextNode(ccCRLF))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccCRLF))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX1 = oEAX.appendChild(oXML.createElement("EAX_1"))
-					oEAX1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+				oEAX1 = oEAX.appendChild(oXML.createElement("EAX_1"))
+				oEAX1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
 
-					oEAX.appendChild(oXML.createTextNode(ccCRLF))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccCRLF))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX2 = oEAX.appendChild(oXML.createElement("EAX_2"))
-					oEAX2.TEXT = ""
+				oEAX2 = oEAX.appendChild(oXML.createElement("EAX_2"))
+				oEAX2.TEXT = ""
 
 			CASE S_CONCEPDIAN = '118' && CONCEPTO DIAN AUXILIOS NO SALARIALES
-					oITE.appendChild(oXML.createTextNode(ccCRLF))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX = oITE.appendChild(oXML.createElement("EAX"))
+				oEAX = oITE.appendChild(oXML.createElement("EAX"))
 
-					oEAX.appendChild(oXML.createTextNode(ccCRLF))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccCRLF))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX1 = oEAX.appendChild(oXML.createElement("EAX_1"))
-					oEAX1.TEXT = ""
+				oEAX1 = oEAX.appendChild(oXML.createElement("EAX_1"))
+				oEAX1.TEXT = ""
 
-					oEAX.appendChild(oXML.createTextNode(ccCRLF))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
-					oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccCRLF))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
+				oEAX.appendChild(oXML.createTextNode(ccTAB))
 
-					oEAX2 = oEAX.appendChild(oXML.createElement("EAX_2"))
-					oEAX2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
-				
+				oEAX2 = oEAX.appendChild(oXML.createElement("EAX_2"))
+				oEAX2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+			CASE S_CONCEPDIAN = '119' && CONCEPTO DIAN OTROS CONCEPTOS SALARIALES
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oEOT = oITE.appendChild(oXML.createElement("EOT"))
+
+				oEOT.appendChild(oXML.createTextNode(ccCRLF))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oEOT1 = oEOT.appendChild(oXML.createElement("EOT_1"))
+				oEOT1.TEXT = ALLTRIM(S_OFIMA_DESCRIPCION)
+
+				oEOT.appendChild(oXML.createTextNode(ccCRLF))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oEOT2 = oEOT.appendChild(oXML.createElement("EOT_2"))
+				oEOT2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+				oEOT.appendChild(oXML.createTextNode(ccCRLF))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+				oEOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oEOT3 = oEOT.appendChild(oXML.createElement("EOT_3"))
+				oEOT3.TEXT = ""
 
 			CASE S_CONCEPDIAN = '120' && CONCEPTO DIAN OTROS CONCEPTOS NO SALARIALES
 				oITE.appendChild(oXML.createTextNode(ccCRLF))
@@ -1217,8 +1410,93 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 				oEOT3 = oEOT.appendChild(oXML.createElement("EOT_3"))
 				oEOT3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 
+			CASE S_CONCEPDIAN = '121' && CONCEPTO DIAN COMPENSACIONES ORDINARIAS
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM = oITE.appendChild(oXML.createElement("ECM"))
+
+				oECM.appendChild(oXML.createTextNode(ccCRLF))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM1 = oECM.appendChild(oXML.createElement("ECM_1"))
+				oECM1.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+				oECM.appendChild(oXML.createTextNode(ccCRLF))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM2 = oECM.appendChild(oXML.createElement("ECM_2"))
+				oECM2.TEXT = ""
+
+			CASE S_CONCEPDIAN = '122' && CONCEPTO DIAN COMPENSACIONES EXTRAORDINARIAS
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM = oITE.appendChild(oXML.createElement("ECM"))
+
+				oECM.appendChild(oXML.createTextNode(ccCRLF))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM1 = oECM.appendChild(oXML.createElement("ECM_1"))
+				oECM1.TEXT = ""
+
+				oECM.appendChild(oXML.createTextNode(ccCRLF))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+				oECM.appendChild(oXML.createTextNode(ccTAB))
+
+				oECM2 = oECM.appendChild(oXML.createElement("ECM_2"))
+				oECM2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				
+				
+			CASE S_CONCEPDIAN = '123' && CONCEPTO DIAN BONOS PAGO SALARIALES
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEBO = oITE.appendChild(oXML.createElement("EBO"))
+
+					oEBO.appendChild(oXML.createTextNode(ccCRLF))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEBO1 = oEBO.appendChild(oXML.createElement("EBO_1"))
+					oEBO1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oEBO.appendChild(oXML.createTextNode(ccCRLF))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEBO2 = oEBO.appendChild(oXML.createElement("EBO_2"))
+					oEBO2.TEXT = ""
+
+					oEBO.appendChild(oXML.createTextNode(ccCRLF))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEBO3 = oEBO.appendChild(oXML.createElement("EBO_3"))
+					oEBO3.TEXT = ""
+
+					oEBO.appendChild(oXML.createTextNode(ccCRLF))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+					oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEBO4 = oEBO.appendChild(oXML.createElement("EBO_4"))
+					oEBO4.TEXT = ""
+
 			CASE S_CONCEPDIAN = '124' && CONCEPTO DIAN BONOS PAGO NO SALARIALES
-				IF VARTYPE(oEBO) = 'U'
 					oITE.appendChild(oXML.createTextNode(ccCRLF))
 					oITE.appendChild(oXML.createTextNode(ccTAB))
 					oITE.appendChild(oXML.createTextNode(ccTAB))
@@ -1256,72 +1534,179 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oEBO4 = oEBO.appendChild(oXML.createElement("EBO_4"))
 					oEBO4.TEXT = ""
-				ELSE
-					oEBO2.TEXT = ALLTRIM(CAST(CAST(oEBO2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
-				ENDIF
-			
+					
+			CASE S_CONCEPDIAN = '125' && CONCEPTO DIAN BONOS ALIMENTACION SALARIALES
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO = oITE.appendChild(oXML.createElement("EBO"))
+
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO1 = oEBO.appendChild(oXML.createElement("EBO_1"))
+				oEBO1.TEXT = ""
+
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO2 = oEBO.appendChild(oXML.createElement("EBO_2"))
+				oEBO2.TEXT = ""
+				
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO3 = oEBO.appendChild(oXML.createElement("EBO_3"))
+				oEBO3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO4 = oEBO.appendChild(oXML.createElement("EBO_4"))
+				oEBO4.TEXT = ""
+				
+			CASE S_CONCEPDIAN = '126' && CONCEPTO DIAN BONOS ALIMENTACION NO SALARIALES
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO = oITE.appendChild(oXML.createElement("EBO"))
+
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO1 = oEBO.appendChild(oXML.createElement("EBO_1"))
+				oEBO1.TEXT = ""
+
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO2 = oEBO.appendChild(oXML.createElement("EBO_2"))
+				oEBO2.TEXT = ""
+				
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO3 = oEBO.appendChild(oXML.createElement("EBO_3"))
+				oEBO3.TEXT = ""
+				
+				oEBO.appendChild(oXML.createTextNode(ccCRLF))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+				oEBO.appendChild(oXML.createTextNode(ccTAB))
+
+				oEBO4 = oEBO.appendChild(oXML.createElement("EBO_4"))
+				oEBO4.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				
+			CASE S_CONCEPDIAN = '127' && CONCEPTO DIAN COMISION
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+
+				oECO = oITE.appendChild(oXML.createElement("ECO"))
+
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+
+				oECO1 = oECO.appendChild(oXML.createElement("ECO_1"))
+				oECO1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+
+				oECO2 = oECO.appendChild(oXML.createElement("ECO_2"))
+				oECO2.TEXT = ""
+
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+
+				oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
+				oECO3.TEXT = ""
+
+
 			CASE S_CONCEPDIAN = '128' && CONCEPTO DIAN PAGO TERCEROS
-					oITE.appendChild(oXML.createTextNode(ccCRLF))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO = oITE.appendChild(oXML.createElement("ECO"))
+				oECO = oITE.appendChild(oXML.createElement("ECO"))
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO1 = oECO.appendChild(oXML.createElement("ECO_1"))
-					oECO1.TEXT = ""
+				oECO1 = oECO.appendChild(oXML.createElement("ECO_1"))
+				oECO1.TEXT = ""
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO2 = oECO.appendChild(oXML.createElement("ECO_2"))
-					oECO2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+				oECO2 = oECO.appendChild(oXML.createElement("ECO_2"))
+				oECO2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
-					oECO3.TEXT = ""
-			
+				oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
+				oECO3.TEXT = ""
+
 			CASE S_CONCEPDIAN = '129' && CONCEPTO DIAN ANTICIPO
-					oITE.appendChild(oXML.createTextNode(ccCRLF))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
-					oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccCRLF))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
+				oITE.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO = oITE.appendChild(oXML.createElement("ECO"))
+				oECO = oITE.appendChild(oXML.createElement("ECO"))
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO1 = oECO.appendChild(oXML.createElement("ECO_1"))
-					oECO1.TEXT = ""
+				oECO1 = oECO.appendChild(oXML.createElement("ECO_1"))
+				oECO1.TEXT = ""
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO2 = oECO.appendChild(oXML.createElement("ECO_2"))
-					oECO2.TEXT = ""
+				oECO2 = oECO.appendChild(oXML.createElement("ECO_2"))
+				oECO2.TEXT = ""
 
-					oECO.appendChild(oXML.createTextNode(ccCRLF))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
-					oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccCRLF))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
+				oECO.appendChild(oXML.createTextNode(ccTAB))
 
-					oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
-					oECO3.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
-			
+				oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
+				oECO3.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
 			CASE S_CONCEPDIAN = '131' && CONCEPTO DIAN APOYO SOSTENIMIENTO
 				IF VARTYPE(oEVO) = 'U'
 					oITE.appendChild(oXML.createTextNode(ccCRLF))
@@ -1360,11 +1745,27 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEVO.appendChild(oXML.createTextNode(ccTAB))
 
 					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
-					oEVO4.TEXT = ""
+					oEVO4.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = "0.00"
 				ELSE
 					oEVO2.TEXT = ALLTRIM(CAST(CAST(oEVO2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
 				ENDIF
-				
+
 			CASE S_CONCEPDIAN = '132' && CONCEPTO DIAN APOYO SOSTENIMIENTO
 				IF VARTYPE(oEVO) = 'U'
 					oITE.appendChild(oXML.createTextNode(ccCRLF))
@@ -1379,7 +1780,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEVO.appendChild(oXML.createTextNode(ccTAB))
 
 					oEVO1 = oEVO.appendChild(oXML.createElement("EVO_1"))
-					oEVO1.TEXT = ""
+					oEVO1.TEXT = "0.00"
 
 					oEVO.appendChild(oXML.createTextNode(ccCRLF))
 					oEVO.appendChild(oXML.createTextNode(ccTAB))
@@ -1403,19 +1804,215 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEVO.appendChild(oXML.createTextNode(ccTAB))
 
 					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
-					oEVO4.TEXT = ""
+					oEVO4.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = "0.00"
 				ELSE
 					oEVO3.TEXT = ALLTRIM(CAST(CAST(oEVO3.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
 				
+			CASE S_CONCEPDIAN = '133' && CONCEPTO DIAN BONIFICACION RETIRO
+				IF VARTYPE(oEVO) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO = oITE.appendChild(oXML.createElement("EVO"))
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO1 = oEVO.appendChild(oXML.createElement("EVO_1"))
+					oEVO1.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO2 = oEVO.appendChild(oXML.createElement("EVO_2"))
+					oEVO2.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO3 = oEVO.appendChild(oXML.createElement("EVO_3"))
+					oEVO3.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
+					oEVO4.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = "0.00"
+				ELSE
+					oEVO4.TEXT = ALLTRIM(CAST(CAST(oEVO4.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
+				ENDIF
+				
+			CASE S_CONCEPDIAN = '134' && CONCEPTO DIAN INDEMNIZACION
+				IF VARTYPE(oEVO) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO = oITE.appendChild(oXML.createElement("EVO"))
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO1 = oEVO.appendChild(oXML.createElement("EVO_1"))
+					oEVO1.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO2 = oEVO.appendChild(oXML.createElement("EVO_2"))
+					oEVO2.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO3 = oEVO.appendChild(oXML.createElement("EVO_3"))
+					oEVO3.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
+					oEVO4.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = "0.00"
+				ELSE
+					oEVO5.TEXT = ALLTRIM(CAST(CAST(oEVO5.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
+				ENDIF
+				
+			
+			CASE S_CONCEPDIAN = '135' && CONCEPTO DIAN REINTEGRO
+				IF VARTYPE(oEVO) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO = oITE.appendChild(oXML.createElement("EVO"))
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO1 = oEVO.appendChild(oXML.createElement("EVO_1"))
+					oEVO1.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO2 = oEVO.appendChild(oXML.createElement("EVO_2"))
+					oEVO2.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO3 = oEVO.appendChild(oXML.createElement("EVO_3"))
+					oEVO3.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
+					oEVO4.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+					
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				ELSE
+					oEVO6.TEXT = ALLTRIM(CAST(CAST(oEVO6.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
+				ENDIF
+
+
 			CASE S_CONCEPDIAN = '203' && CONCEPTO DIAN SOLIDARIDAD
 				IF VARTYPE(oSSP) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSSP = oITS.appendChild(oXML.createElement("SSP"))
-	
+
 					oSSP.appendChild(oXML.createTextNode(ccCRLF))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
@@ -1431,7 +2028,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSSP2 = oSSP.appendChild(oXML.createElement("SSP_2"))
 					oSSP2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
-					
+
 					oSSP.appendChild(oXML.createTextNode(ccCRLF))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
@@ -1439,7 +2036,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSSP3 = oSSP.appendChild(oXML.createElement("SSP_3"))
 					oSSP3.TEXT = ""
-					
+
 					oSSP.appendChild(oXML.createTextNode(ccCRLF))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
 					oSSP.appendChild(oXML.createTextNode(ccTAB))
@@ -1451,63 +2048,166 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oSSP2.TEXT = ALLTRIM(CAST(CAST(oSSP2.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
 				
-			CASE S_CONCEPDIAN = '207' && CONCEPTO DIAN LIBRANZAS
-					oITS.appendChild(oXML.createTextNode(ccCRLF))
-					oITS.appendChild(oXML.createTextNode(ccTAB))
-					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
-					oSLI = oITS.appendChild(oXML.createElement("SLI"))
-	
-					oSLI.appendChild(oXML.createTextNode(ccCRLF))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-
-					oSLI1 = oSLI.appendChild(oXML.createElement("SLI_1"))
-					oSLI1.TEXT = ALLTRIM(S_OFIMA_DESCRIPCION)
-
-					oSLI.appendChild(oXML.createTextNode(ccCRLF))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-					oSLI.appendChild(oXML.createTextNode(ccTAB))
-
-					oSLI2 = oSLI.appendChild(oXML.createElement("SLI_2"))
-					oSLI2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))		
+			CASE S_CONCEPDIAN = '204' && CONCEPTO DIAN SINDICATO
 			
-			CASE S_CONCEPDIAN = '208' && CONCEPTO DIAN PAGO A TERCEROS
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
+
+					oSIN = oITS.appendChild(oXML.createElement("SIN"))
+
+					oSIN.appendChild(oXML.createTextNode(ccCRLF))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+
+					oSIN1 = oSIN.appendChild(oXML.createElement("SIN_1"))
+					oSIN1.TEXT = "0"
+
+					oSIN.appendChild(oXML.createTextNode(ccCRLF))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+					oSIN.appendChild(oXML.createTextNode(ccTAB))
+
+					oSIN2 = oSIN.appendChild(oXML.createElement("SIN_2"))
+					oSIN2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 					
-					oSOT = oITS.appendChild(oXML.createElement("SOT"))
-	
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
+			CASE S_CONCEPDIAN = '205' && CONCEPTO DIAN SANCIONES PUBLICAS
+			
+					oITS.appendChild(oXML.createTextNode(ccCRLF))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT1 = oSOT.appendChild(oXML.createElement("SOT_1"))
-					oSOT1.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+					oSAN = oITS.appendChild(oXML.createElement("SAN"))
 
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccCRLF))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT2 = oSOT.appendChild(oXML.createElement("SOT_2"))
-					oSOT2.TEXT = ""
+					oSAN1 = oSAN.appendChild(oXML.createElement("SAN_1"))
+					oSAN1.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+					oSAN.appendChild(oXML.createTextNode(ccCRLF))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+
+					oSAN2 = oSAN.appendChild(oXML.createElement("SAN_2"))
+					oSAN2.TEXT = ""
 					
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
+			CASE S_CONCEPDIAN = '206' && CONCEPTO DIAN SANCIONES PRIVADAS
+			
+					oITS.appendChild(oXML.createTextNode(ccCRLF))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
-					oSOT3.TEXT = ""
+					oSAN = oITS.appendChild(oXML.createElement("SAN"))
+
+					oSAN.appendChild(oXML.createTextNode(ccCRLF))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+
+					oSAN1 = oSAN.appendChild(oXML.createElement("SAN_1"))
+					oSAN1.TEXT = ""
+
+					oSAN.appendChild(oXML.createTextNode(ccCRLF))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+					oSAN.appendChild(oXML.createTextNode(ccTAB))
+
+					oSAN2 = oSAN.appendChild(oXML.createElement("SAN_2"))
+					oSAN2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 					
+			CASE S_CONCEPDIAN = '207' && CONCEPTO DIAN LIBRANZAS
+				oITS.appendChild(oXML.createTextNode(ccCRLF))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+
+				oSLI = oITS.appendChild(oXML.createElement("SLI"))
+
+				oSLI.appendChild(oXML.createTextNode(ccCRLF))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+
+				oSLI1 = oSLI.appendChild(oXML.createElement("SLI_1"))
+				oSLI1.TEXT = ALLTRIM(S_OFIMA_DESCRIPCION)
+
+				oSLI.appendChild(oXML.createTextNode(ccCRLF))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+				oSLI.appendChild(oXML.createTextNode(ccTAB))
+
+				oSLI2 = oSLI.appendChild(oXML.createElement("SLI_2"))
+				oSLI2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+			CASE S_CONCEPDIAN = '208' && CONCEPTO DIAN PAGO A TERCEROS
+				oITS.appendChild(oXML.createTextNode(ccCRLF))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT = oITS.appendChild(oXML.createElement("SOT"))
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT1 = oSOT.appendChild(oXML.createElement("SOT_1"))
+				oSOT1.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT2 = oSOT.appendChild(oXML.createElement("SOT_2"))
+				oSOT2.TEXT = ""
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
+				oSOT3.TEXT = ""
+				
+			CASE S_CONCEPDIAN = '209' && CONCEPTO DIAN ANTICIPOS
+				oITS.appendChild(oXML.createTextNode(ccCRLF))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT = oITS.appendChild(oXML.createElement("SOT"))
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT1 = oSOT.appendChild(oXML.createElement("SOT_1"))
+				oSOT1.TEXT = ""
+				
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT2 = oSOT.appendChild(oXML.createElement("SOT_2"))
+				oSOT2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
+				oSOT3.TEXT = ""
+
 			CASE S_CONCEPDIAN = '210' && CONCEPTO DIAN OTRAS DEDUCCIONES
 				IF S_NUMCONCEP = 'LICNO'
-				
+
 					oITE.appendChild(oXML.createTextNode(ccCRLF))
 					oITE.appendChild(oXML.createTextNode(ccTAB))
 					oITE.appendChild(oXML.createTextNode(ccTAB))
@@ -1543,45 +2243,45 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oELN.appendChild(oXML.createTextNode(ccTAB))
 
 				ENDIF
-				
-					oITS.appendChild(oXML.createTextNode(ccCRLF))
-					oITS.appendChild(oXML.createTextNode(ccTAB))
-					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
-					oSOT = oITS.appendChild(oXML.createElement("SOT"))
-	
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT1 = oSOT.appendChild(oXML.createElement("SOT_1"))
-					oSOT1.TEXT = ""
+				oITS.appendChild(oXML.createTextNode(ccCRLF))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
+				oITS.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT = oITS.appendChild(oXML.createElement("SOT"))
 
-					oSOT2 = oSOT.appendChild(oXML.createElement("SOT_2"))
-					oSOT2.TEXT = ""
-					
-					oSOT.appendChild(oXML.createTextNode(ccCRLF))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
-					oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
 
-					oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
-					oSOT3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
-				
+				oSOT1 = oSOT.appendChild(oXML.createElement("SOT_1"))
+				oSOT1.TEXT = ""
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT2 = oSOT.appendChild(oXML.createElement("SOT_2"))
+				oSOT2.TEXT = ""
+
+				oSOT.appendChild(oXML.createTextNode(ccCRLF))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+				oSOT.appendChild(oXML.createTextNode(ccTAB))
+
+				oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
+				oSOT3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
 			CASE S_CONCEPDIAN = '211' && CONCEPTO DIAN PENSIÓN VOLUNTARIA
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1597,55 +2297,55 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
-					oSVA3.TEXT = ""		
-					
+					oSVA3.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ""					
-					
+					oSVA5.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
-					oSVA6.TEXT = ""		
-					
+					oSVA6.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1659,15 +2359,15 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA1.TEXT = ALLTRIM(CAST(CAST(oSVA1.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
+
 			CASE S_CONCEPDIAN = '212' && CONCEPTO DIAN RETENCIÓN EN LA FUENTE
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1683,55 +2383,55 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
-					oSVA3.TEXT = ""		
-					
+					oSVA3.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ""					
-					
+					oSVA5.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
-					oSVA6.TEXT = ""		
-					
+					oSVA6.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1745,15 +2445,15 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA2.TEXT = ALLTRIM(CAST(CAST(oSVA2.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
-				CASE S_CONCEPDIAN = '213' && CONCEPTO DIAN AFC
+
+			CASE S_CONCEPDIAN = '213' && CONCEPTO DIAN AFC
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1769,55 +2469,55 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
-					oSVA3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))	
-					
+					oSVA3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ""					
-					
+					oSVA5.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
-					oSVA6.TEXT = ""		
-					
+					oSVA6.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1831,15 +2531,15 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA3.TEXT = ALLTRIM(CAST(CAST(oSVA3.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
-				CASE S_CONCEPDIAN = '215' && CONCEPTO DIAN EMBARGO FISCAL
+
+			CASE S_CONCEPDIAN = '215' && CONCEPTO DIAN EMBARGO FISCAL
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1855,7 +2555,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1863,47 +2563,47 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
 					oSVA3.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))					
-					
+					oSVA5.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
-					oSVA6.TEXT = ""		
-					
+					oSVA6.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1917,15 +2617,15 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA5.TEXT = ALLTRIM(CAST(CAST(oSVA5.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
-				CASE S_CONCEPDIAN = '216' && CONCEPTO DIAN PLAN COMPLEMENTARIOS
+
+			CASE S_CONCEPDIAN = '216' && CONCEPTO DIAN PLAN COMPLEMENTARIOS
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1941,7 +2641,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1949,23 +2649,23 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
 					oSVA3.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ""		
-					
+					oSVA5.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -1973,23 +2673,23 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
 					oSVA6.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -2003,15 +2703,15 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA6.TEXT = ALLTRIM(CAST(CAST(oSVA6.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
-				CASE S_CONCEPDIAN = '219' && CONCEPTO DIAN DEUDA
+			
+			CASE S_CONCEPDIAN = '217' && CONCEPTO DIAN EDUCACION
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
-					
+
 					oSVA = oITS.appendChild(oXML.createElement("SVA"))
-	
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -2027,7 +2727,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
 					oSVA2.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -2035,23 +2735,23 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
 					oSVA3.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
-					oSVA4.TEXT = ""		
-					
+					oSVA4.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
-					oSVA5.TEXT = ""		
-					
+					oSVA5.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -2059,23 +2759,195 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
 					oSVA6.TEXT = ""
-					
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
-					oSVA7.TEXT = ""	
-					
+					oSVA7.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 
 					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
-					oSVA8.TEXT = ""		
-					
+					oSVA8.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA9 = oSVA.appendChild(oXML.createElement("SVA_9"))
+					oSVA9.TEXT = ""
+				ELSE
+					IF EMPTY(oSVA7.TEXT)
+						oSVA7.TEXT = "0.00"
+					ENDIF
+					oSVA7.TEXT = ALLTRIM(CAST(CAST(oSVA7.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
+				ENDIF
+				
+			CASE S_CONCEPDIAN = '218' && CONCEPTO DIAN REINTEGRO
+				IF VARTYPE(oSVA) = 'U'
+					oITS.appendChild(oXML.createTextNode(ccCRLF))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA = oITS.appendChild(oXML.createElement("SVA"))
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA1 = oSVA.appendChild(oXML.createElement("SVA_1"))
+					oSVA1.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
+					oSVA2.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
+					oSVA3.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
+					oSVA4.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
+					oSVA5.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
+					oSVA6.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
+					oSVA7.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
+					oSVA8.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA9 = oSVA.appendChild(oXML.createElement("SVA_9"))
+					oSVA9.TEXT = ""
+				ELSE
+					IF EMPTY(oSVA8.TEXT)
+						oSVA8.TEXT = "0.00"
+					ENDIF
+					oSVA8.TEXT = ALLTRIM(CAST(CAST(oSVA8.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
+				ENDIF
+
+			CASE S_CONCEPDIAN = '219' && CONCEPTO DIAN DEUDA
+				IF VARTYPE(oSVA) = 'U'
+					oITS.appendChild(oXML.createTextNode(ccCRLF))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+					oITS.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA = oITS.appendChild(oXML.createElement("SVA"))
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA1 = oSVA.appendChild(oXML.createElement("SVA_1"))
+					oSVA1.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA2 = oSVA.appendChild(oXML.createElement("SVA_2"))
+					oSVA2.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA3 = oSVA.appendChild(oXML.createElement("SVA_3"))
+					oSVA3.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA4 = oSVA.appendChild(oXML.createElement("SVA_4"))
+					oSVA4.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA5 = oSVA.appendChild(oXML.createElement("SVA_5"))
+					oSVA5.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA6 = oSVA.appendChild(oXML.createElement("SVA_6"))
+					oSVA6.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA7 = oSVA.appendChild(oXML.createElement("SVA_7"))
+					oSVA7.TEXT = ""
+
+					oSVA.appendChild(oXML.createTextNode(ccCRLF))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+					oSVA.appendChild(oXML.createTextNode(ccTAB))
+
+					oSVA8 = oSVA.appendChild(oXML.createElement("SVA_8"))
+					oSVA8.TEXT = ""
+
 					oSVA.appendChild(oXML.createTextNode(ccCRLF))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
 					oSVA.appendChild(oXML.createTextNode(ccTAB))
@@ -2089,7 +2961,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					ENDIF
 					oSVA9.TEXT = ALLTRIM(CAST(CAST(oSVA9.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
-				
+
 			ENDCASE
 		ENDIF
 	ENDSCAN
