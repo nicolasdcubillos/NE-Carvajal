@@ -1706,6 +1706,66 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 				oECO3 = oECO.appendChild(oXML.createElement("ECO_3"))
 				oECO3.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+				
+			CASE S_CONCEPDIAN = '130' && CONCEPTO DIAN DOTACIONES
+				IF VARTYPE(oEVO) = 'U'
+					oITE.appendChild(oXML.createTextNode(ccCRLF))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+					oITE.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO = oITE.appendChild(oXML.createElement("EVO"))
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO1 = oEVO.appendChild(oXML.createElement("EVO_1"))
+					oEVO1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO2 = oEVO.appendChild(oXML.createElement("EVO_2"))
+					oEVO2.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO3 = oEVO.appendChild(oXML.createElement("EVO_3"))
+					oEVO3.TEXT = "0.00"
+
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO4 = oEVO.appendChild(oXML.createElement("EVO_4"))
+					oEVO4.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO5 = oEVO.appendChild(oXML.createElement("EVO_5"))
+					oEVO5.TEXT = "0.00"
+					
+					oEVO.appendChild(oXML.createTextNode(ccCRLF))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+					oEVO.appendChild(oXML.createTextNode(ccTAB))
+
+					oEVO6 = oEVO.appendChild(oXML.createElement("EVO_6"))
+					oEVO6.TEXT = "0.00"
+				ELSE
+					oEVO1.TEXT = ALLTRIM(CAST(CAST(oEVO1.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+				ENDIF
+			
 
 			CASE S_CONCEPDIAN = '131' && CONCEPTO DIAN APOYO SOSTENIMIENTO
 				IF VARTYPE(oEVO) = 'U'
@@ -2062,7 +2122,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
 
 					oSIN1 = oSIN.appendChild(oXML.createElement("SIN_1"))
-					oSIN1.TEXT = "0"
+					oSIN1.TEXT = "1.00"
 
 					oSIN.appendChild(oXML.createTextNode(ccCRLF))
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
