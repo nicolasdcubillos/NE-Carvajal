@@ -2122,7 +2122,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
 
 					oSIN1 = oSIN.appendChild(oXML.createElement("SIN_1"))
-					oSIN1.TEXT = "1.00"
+					oSIN1.TEXT = "1"
 
 					oSIN.appendChild(oXML.createTextNode(ccCRLF))
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
