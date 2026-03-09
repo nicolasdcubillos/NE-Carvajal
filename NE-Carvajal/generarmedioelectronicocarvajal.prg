@@ -592,6 +592,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 	oITE1= oITE.appendChild(oXML.createElement("ITE_1"))
 	oITE1.TEXT = ALLTRIM(CAST(S_DIASPAG AS CHARACTER (50)))
+	lnDiasPag = INT(S_DIASPAG) && Guardado para usar en EPR_1 (casos 108/109) donde el cursor ya cambió
 
 	oITE.appendChild(oXML.createTextNode(ccCRLF))
 	oITE.appendChild(oXML.createTextNode(ccTAB))
@@ -836,11 +837,11 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 			CASE S_CONCEPDIAN = '201' && CONCEPTO DIAN SALUD
 				oITS1.TEXT = ALLTRIM(CAST(C_GLOBAL.S_PORCENTAJESALUD AS CHARACTER (50)))
-				oITS2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				oITS2.TEXT = ALLTRIM(CAST(CAST(oITS2.TEXT AS NUMERIC(10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 
 			CASE S_CONCEPDIAN = '202' && CONCEPTO DIAN PENSIÓN
 				oSPE1.TEXT = ALLTRIM(CAST(C_GLOBAL.S_PORCENTAJEPENSION AS CHARACTER (50)))
-				oSPE2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
+				oSPE2.TEXT = ALLTRIM(CAST(CAST(oSPE2.TEXT AS NUMERIC(10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 
 			CASE S_CONCEPDIAN = '106' && CONCEPTO DIAN VACACIONES DISFRUTADAS
 				IF VARTYPE(oEVC) = 'U'
@@ -935,7 +936,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
-					oEPR1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+					oEPR1.TEXT = ALLTRIM(STR(lnDiasPag))
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
@@ -943,13 +944,21 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
-					oEPR2.TEXT = "0"
+					oEPR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+
+					oEPR3 = oEPR.appendChild(oXML.createElement("EPR_3"))
+					oEPR3.TEXT = "0"
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 				ELSE
-					oEPR1.TEXT = ALLTRIM(CAST(CAST(oEPR1.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+					oEPR2.TEXT = ALLTRIM(STR(INT(CAST(oEPR2.TEXT AS NUMERIC (10,2)) + S_VALOR)))
 				ENDIF
 
 			CASE S_CONCEPDIAN = '109' && CONCEPTO DIAN PRIMA NO SALARIAL
@@ -966,7 +975,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
-					oEPR1.TEXT = "0"
+					oEPR1.TEXT = ALLTRIM(STR(lnDiasPag))
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
@@ -974,13 +983,21 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
-					oEPR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+					oEPR2.TEXT = "0"
+
+					oEPR.appendChild(oXML.createTextNode(ccCRLF))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+					oEPR.appendChild(oXML.createTextNode(ccTAB))
+
+					oEPR3 = oEPR.appendChild(oXML.createElement("EPR_3"))
+					oEPR3.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 				ELSE
-					oEPR2.TEXT = ALLTRIM(CAST(CAST(oEPR2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+					oEPR3.TEXT = ALLTRIM(STR(INT(CAST(oEPR3.TEXT AS NUMERIC (10,2)) + S_VALOR)))
 				ENDIF
 
 			CASE S_CONCEPDIAN = '110' && CONCEPTO DIAN CESANTIAS

@@ -1,25 +1,25 @@
 */
 *!*
-*!*		Nombre: Generar y enviar XML Carvajal Nómina Electrónica via Web Service (V6) - ERP OFIMA
+*!*		Nombre: Generar y enviar XML Carvajal Nï¿½mina Electrï¿½nica via Web Service (V6) - ERP OFIMA
 *!*
-*!*		Autor: Nicolás David Cubillos
+*!*		Autor: Nicolas David Cubillos
 *!*
-*!*		Contenido: Función main: enviarMedio. | El PRG contiene todas las funciones encargadas de generar
-*!*				   y/o enviar el medio electrónico XML Carvajal por medio del Web Service en su versión 6 (1 OCT 2021).
+*!*		Contenido: Funcion main: enviarMedio. | El PRG contiene todas las funciones encargadas de generar
+*!*				   y/o enviar el medio electronico XML Carvajal por medio del Web Service en su version 6 (1 OCT 2021).
 *!*
 *!*		Fecha: 29 septiembre 2021.
 *!*
-*!*		Versión: 1.4 - Octubre 29 de 2021.
-*!*		Versión: 2.0 - Enero 10 de 2022.
+*!*		Versiï¿½n: 1.4 - Octubre 29 de 2021.
+*!*		Versiï¿½n: 2.0 - Enero 10 de 2022.
 */
 
-#DEFINE ccCRLF CHR(13) + CHR(10) && Salto de línea
-#DEFINE ccTAB CHR(9) && Tabulación
+#DEFINE ccCRLF CHR(13) + CHR(10) && Salto de linea
+#DEFINE ccTAB CHR(9) && Tabulacion
 
 *---------------------------------------------------
 
-FUNCTION enviarMedio && Función principal: Hace uso de las demás funciones existentes en el PRG.
-*!* 	    Retorna verdadero si se timbra el medio, falso si ocurre algún error en cualquier momento.
+FUNCTION enviarMedio && Funcion principal: Hace uso de las demas funciones existentes en el PRG.
+*!* 	    Retorna verdadero si se timbra el medio, falso si ocurre algun error en cualquier momento.
 
 LPARAMETERS MEDIOBASE64, CURRENTPATH, ON, C_GLOBAL, TIPODCTO, NRODCTO, NOMBREARCHIVO, VERREQUESTRESPONSE
 
@@ -51,7 +51,7 @@ ELSE
 *!*			XMLrequest = crearRequestDocumentStatus(S_USUARIO, S_CONTRASENA, S_COMPANYID, S_ACCOUNTID, TRANSACTIONID)
 *!*			_CLIPTEXT = XMLrequest
 *!*			WAIT "" TIMEOUT 2
-*!*			&&MESSAGEBOX("Copiar acá el XML request.")
+*!*			&&MESSAGEBOX("Copiar acï¿½ el XML request.")
 *!*			IF enviarRequest(XMLrequest, CURRENTPATH, TIPODCTO, NRODCTO, 2) = "T"
 *!*				MESSAGEBOX("PASO BIEN" + TIPODCTO + NRODCTO")
 *!*			ELSE
@@ -66,12 +66,12 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION FORMATEARFECHA AS STRING && Formatea una fecha recibida por paráemtro a una cadena de caracteres separada por '-'
+FUNCTION FORMATEARFECHA AS STRING && Formatea una fecha recibida por parï¿½emtro a una cadena de caracteres separada por '-'
 
 LPARAMETERS FECHA
 STORE "" TO RESULT
 RESULT = TRANSFORM(YEAR(FECHA)) + "-"
-RESULT = RESULT + IIF(MONTH(FECHA) <10, "0", "") && Si el día está entre 1 y 9, le agrega un 0 antes. Ej día 9 = Queda día 09.
+RESULT = RESULT + IIF(MONTH(FECHA) <10, "0", "") && Si el dï¿½a estï¿½ entre 1 y 9, le agrega un 0 antes. Ej dï¿½a 9 = Queda dï¿½a 09.
 RESULT = RESULT + TRANSFORM(MONTH(FECHA)) + "-"
 RESULT = RESULT + IIF(DAY(FECHA) < 10, "0", "")
 RESULT = RESULT + TRANSFORM(DAY(FECHA))
@@ -81,11 +81,11 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION GENERARMEDIO AS STRING && Función que genera el XML y retorna el mismo encriptado en BASE64.
+FUNCTION GENERARMEDIO AS STRING && Funciï¿½n que genera el XML y retorna el mismo encriptado en BASE64.
 
 LPARAMETERS C_EMPLEADO, C_GLOBAL, C_DETALLEEMPLEADO, CURRENTPATH, ON, NOMBREARCHIVO
-&& Recibe por parámetros los datos del empleado, datos globales del emisor, el detalle de nómina del empleado y el PATH en el que se
-&& almacenará el medio, conexión a SQL y el nombre del archivo con el que se almacenará en el FileSystem en la ubicación PATH.
+&& Recibe por parï¿½metros los datos del empleado, datos globales del emisor, el detalle de nï¿½mina del empleado y el PATH en el que se
+&& almacenarï¿½ el medio, conexiï¿½n a SQL y el nombre del archivo con el que se almacenarï¿½ en el FileSystem en la ubicaciï¿½n PATH.
 
 LOCAL C_EMISOR AS CURSOR
 
@@ -104,7 +104,7 @@ SET CENTURY OFF
 
 pathSalida = CURRENTPATH + "NOMINA_ELECTRONICA\" + NOMBREARCHIVO && Ruta quemada.
 
-TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el objeto MSXML2.DOMDOCUMENT no tabula automáticamente.
+TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el objeto MSXML2.DOMDOCUMENT no tabula automï¿½ticamente.
 	oXML = CREATEOBJECT("MSXML2.DOMDOCUMENT.4.0")
 
 	oXML.appendChild(oXML.createNode("PROCESSINGINSTRUCTION", "xml", ""))
@@ -838,7 +838,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 				oITS1.TEXT = ALLTRIM(CAST(C_GLOBAL.S_PORCENTAJESALUD AS CHARACTER (50)))
 				oITS2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 
-			CASE S_CONCEPDIAN = '202' && CONCEPTO DIAN PENSIÓN
+			CASE S_CONCEPDIAN = '202' && CONCEPTO DIAN PENSIï¿½N
 				oSPE1.TEXT = ALLTRIM(CAST(C_GLOBAL.S_PORCENTAJEPENSION AS CHARACTER (50)))
 				oSPE2.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 
@@ -935,7 +935,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR1 = oEPR.appendChild(oXML.createElement("EPR_1"))
-					oEPR1.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+					oEPR1.TEXT = ALLTRIM(STR(INT(S_VALOR)))
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
@@ -974,13 +974,13 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 
 					oEPR2 = oEPR.appendChild(oXML.createElement("EPR_2"))
-					oEPR2.TEXT = ALLTRIM(CAST(S_VALOR AS CHARACTER (50)))
+					oEPR2.TEXT = ALLTRIM(STR(INT(S_VALOR)))
 
 					oEPR.appendChild(oXML.createTextNode(ccCRLF))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 					oEPR.appendChild(oXML.createTextNode(ccTAB))
 				ELSE
-					oEPR2.TEXT = ALLTRIM(CAST(CAST(oEPR2.TEXT AS NUMERIC (10,2)) + S_VALOR AS CHARACTER (50)))
+					oEPR2.TEXT = ALLTRIM(STR(INT(CAST(oEPR2.TEXT AS NUMERIC (10,2)) + S_VALOR)))
 				ENDIF
 
 			CASE S_CONCEPDIAN = '110' && CONCEPTO DIAN CESANTIAS
@@ -2122,7 +2122,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
 
 					oSIN1 = oSIN.appendChild(oXML.createElement("SIN_1"))
-					oSIN1.TEXT = "1"
+					oSIN1.TEXT = "1.00"
 
 					oSIN.appendChild(oXML.createTextNode(ccCRLF))
 					oSIN.appendChild(oXML.createTextNode(ccTAB))
@@ -2334,7 +2334,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 				oSOT3 = oSOT.appendChild(oXML.createElement("SOT_3"))
 				oSOT3.TEXT = ALLTRIM(CAST(ABS(S_VALOR) AS CHARACTER (50)))
 
-			CASE S_CONCEPDIAN = '211' && CONCEPTO DIAN PENSIÓN VOLUNTARIA
+			CASE S_CONCEPDIAN = '211' && CONCEPTO DIAN PENSIï¿½N VOLUNTARIA
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
@@ -2420,7 +2420,7 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 					oSVA1.TEXT = ALLTRIM(CAST(CAST(oSVA1.TEXT AS NUMERIC (10,2)) + ABS(S_VALOR) AS CHARACTER (50)))
 				ENDIF
 
-			CASE S_CONCEPDIAN = '212' && CONCEPTO DIAN RETENCIÓN EN LA FUENTE
+			CASE S_CONCEPDIAN = '212' && CONCEPTO DIAN RETENCIï¿½N EN LA FUENTE
 				IF VARTYPE(oSVA) = 'U'
 					oITS.appendChild(oXML.createTextNode(ccCRLF))
 					oITS.appendChild(oXML.createTextNode(ccTAB))
@@ -3074,10 +3074,10 @@ TRY && Generando el medio, etiqueta por etiqueta con espacios y tabulaciones, el
 
 	oXML.SAVE(pathSalida)
 	returnBase64 = STRCONV(FILETOSTR(pathSalida), 13)
-*_CLIPTEXT = returnBase64 -- Guarda el base64 en el portapapeles para poder comprobar si quedó bien generado.
+*_CLIPTEXT = returnBase64 -- Guarda el base64 en el portapapeles para poder comprobar si quedï¿½ bien generado.
 
 CATCH TO IOEXCEPTION
-	MESSAGEBOX("Error: " + IOEXCEPTION.MESSAGE + CHR(13) + CHR(13) + "Código de error: " + TRANSFORM(IOEXCEPTION.LINENO) + CHR(13) + CHR(13) + "Código que produjo el error: " + MESSAGE(1), 48)
+	MESSAGEBOX("Error: " + IOEXCEPTION.MESSAGE + CHR(13) + CHR(13) + "Cï¿½digo de error: " + TRANSFORM(IOEXCEPTION.LINENO) + CHR(13) + CHR(13) + "Cï¿½digo que produjo el error: " + MESSAGE(1), 48)
 ENDTRY
 
 RETURN returnBase64
@@ -3085,7 +3085,7 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION generarUUID && Función que genera una cadena UUID/GUID, etiqueta NONCE del Header de seguridad de conexión para el WebService. Utilizado para la unicidad de cada petición.
+FUNCTION generarUUID && Funciï¿½n que genera una cadena UUID/GUID, etiqueta NONCE del Header de seguridad de conexiï¿½n para el WebService. Utilizado para la unicidad de cada peticiï¿½n.
 LOCAL UUID
 STORE "" TO UUID
 
@@ -3102,7 +3102,7 @@ IF StringFromGUID2(lcStruc_GUID,@lcGUID,lnSize) = 0
 	RETURN ""
 ENDIF
 RETURN STREXTR(STRCONV(lcGUID,6),"{","}") && >= VFP7
-*RETURN SUBSTR(STRCONV(lcGUID,6),2,36) && < VFP7 Si se tiene un VFP en versión 7 o posterior, se debe utilizar esta línea para el formateo del UUID.
+*RETURN SUBSTR(STRCONV(lcGUID,6),2,36) && < VFP7 Si se tiene un VFP en versiï¿½n 7 o posterior, se debe utilizar esta lï¿½nea para el formateo del UUID.
 
 RETURN UUID
 
@@ -3110,7 +3110,7 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION FECHAACTUAL && Retorna la fecha actual formateada, también utilizada para una etiqueta del XML y Header de seguridad del Request.
+FUNCTION FECHAACTUAL && Retorna la fecha actual formateada, tambiï¿½n utilizada para una etiqueta del XML y Header de seguridad del Request.
 LPARAMETERS OPCION && 1 FECHA Y HORA CON Z - 2 HORA.
 IF OPCION = 1
 	RETURN TTOC(DATETIME(), 3) + ".0" + SUBSTR(TIME(DATETIME()), 10, 2) + "-05:00"
@@ -3121,8 +3121,8 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION generarHeaderSeguridad && Función que genera y retorna el Header de seguridad para la conexión al Web Service (header del request).
-LPARAMETERS USUARIO, CONTRASENA && Recibe el usuario y la contraseña, credenciales otorgadas por el proveedor tecnológico Carvajal.
+FUNCTION generarHeaderSeguridad && Funciï¿½n que genera y retorna el Header de seguridad para la conexiï¿½n al Web Service (header del request).
+LPARAMETERS USUARIO, CONTRASENA && Recibe el usuario y la contraseï¿½a, credenciales otorgadas por el proveedor tecnolï¿½gico Carvajal.
 
 STORE "" TO XMLheader
 UUIDBASE64 = STRCONV(generarUUID(), 13)
@@ -3148,8 +3148,8 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION crearRequestDownload && Función que crea el request para consumir el método DocumentStatus el cual recibe un Transaction ID y retorna el estado de un documento
-&& de nómina existente en el CEN Financiero.
+FUNCTION crearRequestDownload && Funciï¿½n que crea el request para consumir el mï¿½todo DocumentStatus el cual recibe un Transaction ID y retorna el estado de un documento
+&& de nï¿½mina existente en el CEN Financiero.
 
 LPARAMETERS USUARIO, CONTRASENA, COMPANYID, ACCOUNTID, TIPODCTO, NRODCTO
 
@@ -3182,8 +3182,8 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION crearRequestDocumentStatus && Función que crea el request para consumir el método DocumentStatus el cual recibe un Transaction ID y retorna el estado de un documento
-&& de nómina existente en el CEN Financiero.
+FUNCTION crearRequestDocumentStatus && Funciï¿½n que crea el request para consumir el mï¿½todo DocumentStatus el cual recibe un Transaction ID y retorna el estado de un documento
+&& de nï¿½mina existente en el CEN Financiero.
 
 LPARAMETERS USUARIO, CONTRASENA, COMPANYID, ACCOUNTID, TRANSACID
 
@@ -3214,7 +3214,7 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION crearRequestUpload && Función que crea y retorna el request para consumir el método UPLOAD del WS. Usado para subir un documento de nómina individual o de ajuste.
+FUNCTION crearRequestUpload && Funciï¿½n que crea y retorna el request para consumir el mï¿½todo UPLOAD del WS. Usado para subir un documento de nï¿½mina individual o de ajuste.
 LPARAMETERS USUARIO, CONTRASENA, COMPANYID, ACCOUNTID, MEDIOBASE64, NOMBREARCHIVO
 
 LOCAL XMLrequest, UUIDBASE64
@@ -3245,7 +3245,7 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION almacenarTransacID && Almacena en la BD, tabla MTLIQNOMNE campo NECUNE, el TRANSACTIONID de un documento de nómina recibido por Carvajal.
+FUNCTION almacenarTransacID && Almacena en la BD, tabla MTLIQNOMNE campo NECUNE, el TRANSACTIONID de un documento de nï¿½mina recibido por Carvajal.
 LPARAMETERS TIPODCTO, NRODCTO, TRANSACTIONID, ON
 
 SQLUPDATE = "UPDATE MTLIQNOMNE SET NETRANSACID = '" + TRANSACTIONID + "' WHERE TIPODCTO = '" + TIPODCTO + "' AND NRODCTO = '" + NRODCTO + "'"
@@ -3257,7 +3257,7 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION almacenarCuneDIAN && Almacena en la BD, tabla MTLIQNOMNE campo NECUNE, el TRANSACTIONID de un documento de nómina recibido por Carvajal.
+FUNCTION almacenarCuneDIAN && Almacena en la BD, tabla MTLIQNOMNE campo NECUNE, el TRANSACTIONID de un documento de nï¿½mina recibido por Carvajal.
 LPARAMETERS TIPODCTO, NRODCTO, DIANCUNESHA256, ON
 
 SQLUPDATE = "UPDATE MTLIQNOMNE SET NECUNE = '" + DIANCUNESHA256 + "' WHERE TIPODCTO = '" + TIPODCTO + "' AND NRODCTO = '" + NRODCTO + "'"
@@ -3293,8 +3293,8 @@ ENDFUNC
 
 *---------------------------------------------------
 
-FUNCTION validarEnvio && Retorna el transaction id o ERROR si algo falló
-LPARAMETERS XMLresponse, pathSalida, TIPODCTO, NRODCTO, METODO && METODO = 1 ES UPLOAD, OPCIÓN = 2 ES DOCUMENTSTATUS, OPCIÓN = 3 ES DOWNLOAD
+FUNCTION validarEnvio && Retorna el transaction id o ERROR si algo fallï¿½
+LPARAMETERS XMLresponse, pathSalida, TIPODCTO, NRODCTO, METODO && METODO = 1 ES UPLOAD, OPCIï¿½N = 2 ES DOCUMENTSTATUS, OPCIï¿½N = 3 ES DOWNLOAD
 
 STORE "" TO msjError
 STORE "" TO filtro
@@ -3310,13 +3310,13 @@ IF !EMPTY(msjError)
 ENDIF
 
 DO CASE
-CASE METODO = 1 && Para el caso de la subida del XML, sólamente se puede generar el errorMessage. De lo contrario, se captura el Transaction ID.
+CASE METODO = 1 && Para el caso de la subida del XML, sï¿½lamente se puede generar el errorMessage. De lo contrario, se captura el Transaction ID.
 
 	TRANSACID = STREXTRACT(XMLresponse, "<transactionId>","</transactionId>")
 	RETURN TRANSACID
 
 CASE METODO = 2 && Para el caso de la consulta del estado del documento, se puede generar el el error en 'errorMessage' cuando es error interno del servidor, se debe capturar
-&& o también puede generar un 'De' que es error en algunos campos del documento. También se debe capturar.
+&& o tambiï¿½n puede generar un 'De' que es error en algunos campos del documento. Tambiï¿½n se debe capturar.
 &&MESSAGEBOX(XMLresponse)
 	filtro = STREXTRACT(XMLresponse, "<De>", "</De>")
 &&			MESSAGEBOX(filtro)
@@ -3400,10 +3400,10 @@ IF oHTTP.STATUS = 200
 
 	DO CASE
 	CASE METODO = 1
-		RETURN VALIDAR && Si se subió el dcto y se retorna el transactionid
+		RETURN VALIDAR && Si se subiï¿½ el dcto y se retorna el transactionid
 
 	CASE METODO = 2
-		RETURN "T" && Si se estaba consumiendo el método de DocumentStatus, y pasa sin errores, retorna T.
+		RETURN "T" && Si se estaba consumiendo el mï¿½todo de DocumentStatus, y pasa sin errores, retorna T.
 
 	CASE METODO = 3
 		RETURN VALIDAR && RETORNA CUNE
@@ -3411,7 +3411,7 @@ IF oHTTP.STATUS = 200
 	ENDCASE
 
 ELSE
-	MESSAGEBOX("Error de conexion con el Web Service." + CHR(13) + CHR(13) + oHTTP.responseText + CHR(13) + CHR(13) + "Status: " + ALLTRIM(STR(oHTTP.STATUS)) + CHR(13) + CHR(13) + "Compruebe su conexión a Internet o póngase en contacto con su proveedor tecnológico.")
+	MESSAGEBOX("Error de conexion con el Web Service." + CHR(13) + CHR(13) + oHTTP.responseText + CHR(13) + CHR(13) + "Status: " + ALLTRIM(STR(oHTTP.STATUS)) + CHR(13) + CHR(13) + "Compruebe su conexiï¿½n a Internet o pï¿½ngase en contacto con su proveedor tecnolï¿½gico.")
 ENDIF
 
 RETURN ""
